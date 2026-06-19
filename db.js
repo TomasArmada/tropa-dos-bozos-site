@@ -7,7 +7,7 @@
 
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 const supabaseUrl = 'https://ejvxigmbesbcbyzlceau.supabase.co'
-const supabaseKey = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqdnhpZ21iZXNiY2J5emxjZWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4ODc1NTAsImV4cCI6MjA5NzQ2MzU1MH0.IhcESSK2G4LySrMjJQTNogxxvfU7ZWnJVRbNij8_VXM
+const supabaseKey = "sb_publishable_F5NGXD4ndySxhijGox3rFg_OlcCmLu3"
 const supabase = createClient(supabaseUrl, supabaseKey)
 // ------------------------------------------------------------
 // Elementos do DOM
