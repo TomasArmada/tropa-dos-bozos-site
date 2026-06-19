@@ -3,31 +3,284 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meu Site Cloudflare Pages</title>
+  <title>Coisas que o Luís Odeia</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: Arial, sans-serif;
       background: #0f172a;
-      color: white;
-      display: flex;
-      height: 100vh;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      margin: 0;
+      color: #f1f5f9;
+      min-height: 100vh;
+      padding: 2rem 1rem;
     }
 
-    h1 {
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
       color: #38bdf8;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
     }
 
-    p {
-      opacity: 0.8;
+    .header .divider {
+      width: 48px;
+      height: 3px;
+      background: #e24b4a;
+      margin: 12px auto;
+      border-radius: 2px;
+    }
+
+    .header p {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      font-style: italic;
+    }
+
+    /* Status bar */
+    .status-bar {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 0.75rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+      color: #94a3b8;
+    }
+
+    .status-bar i { color: #38bdf8; font-size: 16px; }
+    #db-status { color: #94a3b8; }
+    #db-status.connected { color: #4ade80; }
+    #db-status.error { color: #f87171; }
+
+    /* Grid */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    .cat-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      transition: border-color 0.2s;
+    }
+
+    .cat-card:hover { border-color: #38bdf8; }
+
+    .cat-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #334155;
+    }
+
+    .cat-header i { font-size: 18px; color: #38bdf8; }
+    .cat-title { font-size: 0.85rem; font-weight: 600; color: #e2e8f0; }
+
+    .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .tag {
+      font-size: 0.72rem;
+      padding: 3px 9px;
+      border-radius: 99px;
+      font-weight: 500;
+    }
+
+    .tag-red    { background: #3b1212; color: #fca5a5; }
+    .tag-amber  { background: #2d1f07; color: #fcd34d; }
+    .tag-blue   { background: #0c2340; color: #7dd3fc; }
+    .tag-purple { background: #1e1340; color: #c4b5fd; }
+    .tag-teal   { background: #042d1e; color: #6ee7b7; }
+    .tag-gray   { background: #1e293b; color: #94a3b8; border: 1px solid #334155; }
+    .tag-pink   { background: #2d0f1e; color: #f9a8d4; }
+    .tag-note   { font-size: 0.68rem; color: #64748b; font-style: italic; }
+
+    /* Dynamic entries from DB */
+    .dynamic-section {
+      margin-top: 2rem;
+    }
+
+    .dynamic-section h2 {
+      font-size: 1rem;
+      color: #38bdf8;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .entry-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .entry-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+    }
+
+    .entry-card .entry-date {
+      font-size: 0.72rem;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: 0.75rem;
+      color: #475569;
+      font-style: italic;
     }
   </style>
 </head>
 <body>
-  <h1>COISAS QUE O LUIS ODEIA</h1>
-  <p>tipo alternas, furrys, ciganos, lesbicas, gays , travestis, comunistas, fascistas, mulheres altas, umas quantas gajas que disseram não, pretos, asiaticos (que não a quimico), latinos, brasileiros, imigrantes, indianos, lisboetas, o Benfica, eu e o Tomas de vez em quando, Hugo de vez em quando, Russos no Cs, tu no Cs, o Cs, Valorant, a irmã de vez em quando, a si mesmo, trabalho, professores de shit, o Lance Stroll, a Britney Spears (aquela Britney) mas so de vez em quando, flashs mal mandadas, TeamKillers, Denuvo, pessoas com sorte, casais jovens (de todas sexualidades), french people (que não o Frenchie), o The Deep, maus condutores, condutores mulheres, judeus, WarThunder, abortos, mulheres independentes, a IA, a Nvidia,o Drake, rap e hip pop na generalidade (exceto Eminem),a má otimização do Minecraft, a minha equipa de lapr2 em 2025/2026, Homens bonitos (em progresso)</p>
+  <div class="container">
+
+    <div class="header">
+      <h1>Coisas que o Luís Odeia</h1>
+      <div class="divider"></div>
+      <p>Uma lista cuidadosamente curada de tudo o que irrita o Luís</p>
+    </div>
+
+    <div class="status-bar">
+      <i class="ti ti-database"></i>
+      <span>Base de dados:</span>
+      <span id="db-status">A ligar...</span>
+    </div>
+
+    <div class="categories">
+      <div class="cat-card">
+        <div class="cat-header"><i class="ti ti-users"></i><span class="cat-title">Pessoas</span></div>
+        <div class="tag-list">
+          <span class="tag tag-red">alternas</span>
+          <span class="tag tag-red">furrys</span>
+          <span class="tag tag-red">ciganos</span>
+          <span class="tag tag-red">lesbicas</span>
+          <span class="tag tag-red">gays</span>
+          <span class="tag tag-red">travestis</span>
+          <span class="tag tag-red">mulheres altas</span>
+          <span class="tag tag-red">homens bonitos*</span>
+          <span class="tag tag-red">casais jovens</span>
+          <span class="tag tag-red">condutores mulheres</span>
+          <span class="tag tag-red">maus condutores</span>
+          <span class="tag tag-red">pessoas com sorte</span>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-header"><i class="ti ti-globe"></i><span class="cat-title">Nacionalidades</span></div>
+        <div class="tag-list">
+          <span class="tag tag-amber">french people (exceto o Frenchie)</span>
+          <span class="tag tag-amber">russos</span>
+          <span class="tag tag-amber">brasileiros</span>
+          <span class="tag tag-amber">latinos</span>
+          <span class="tag tag-amber">indianos</span>
+          <span class="tag tag-amber">imigrantes</span>
+          <span class="tag tag-amber">lisboetas</span>
+          <span class="tag tag-amber">asiaticos (exceto a Kimiko)</span>
+          <span class="tag tag-amber">judeus</span>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-header"><i class="ti ti-device-gamepad-2"></i><span class="cat-title">Jogos & Tech</span></div>
+        <div class="tag-list">
+          <span class="tag tag-purple">WarThunder</span>
+          <span class="tag tag-purple">Valorant</span>
+          <span class="tag tag-purple">CS (o jogo)</span>
+          <span class="tag tag-purple">Denuvo</span>
+          <span class="tag tag-purple">má otimização MC</span>
+          <span class="tag tag-purple">a Nvidia</span>
+          <span class="tag tag-purple">a IA</span>
+          <span class="tag tag-purple">TeamKillers</span>
+          <span class="tag tag-purple">flashs mal mandadas</span>
+          <span class="tag tag-purple">tu no CS</span>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-header"><i class="ti ti-music"></i><span class="cat-title">Música & Entret.</span></div>
+        <div class="tag-list">
+          <span class="tag tag-pink">rap & hip hop na generalidade(exceto Eminem)</span>
+          <span class="tag tag-pink">o Drake</span>
+          <span class="tag tag-pink">Britney Spears (Aquela Britney)</span>
+          <span class="tag tag-pink">The Deep</span>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-header"><i class="ti ti-flag-2"></i><span class="cat-title">Política & Ideologia</span></div>
+        <div class="tag-list">
+          <span class="tag tag-teal">comunistas</span>
+          <span class="tag tag-teal">fascistas</span>
+          <span class="tag tag-teal">mulheres independentes</span>
+          <span class="tag tag-teal">abortos</span>
+          <span class="tag tag-teal">Benfica</span>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-header"><i class="ti ti-car-crash"></i><span class="cat-title">F1 & Desporto</span></div>
+        <div class="tag-list">
+          <span class="tag tag-blue">Lance Stroll</span>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-header"><i class="ti ti-mood-confuzed"></i><span class="cat-title">Amigos & Família (com amor, obviamente)</span></div>
+        <div class="tag-list">
+          <span class="tag tag-gray">Tomás (às vezes)</span>
+          <span class="tag tag-gray">Hugo (às vezes)</span>
+          <span class="tag tag-gray">a irmã (às vezes)</span>
+          <span class="tag tag-gray">a si mesmo</span>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-header"><i class="ti ti-briefcase"></i><span class="cat-title">Trabalho & Escola</span></div>
+        <div class="tag-list">
+          <span class="tag tag-amber">trabalho</span>
+          <span class="tag tag-amber">professores de merda</span>
+          <span class="tag tag-amber">gajas que disseram não</span>
+          <span class="tag tag-blue">equipa LAPR2 25/26</span>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+    <div class="footer">
+      <p>Lista sujeita a expansão. Última atualização: 29/05/2026.</p>
+    </div>
+  </div>
+
+  <!-- Script separado para acesso à base de dados -->
+  <script type="module" src="db.js"></script>
 </body>
 </html>
