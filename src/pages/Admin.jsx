@@ -6,12 +6,13 @@ export default function Admin() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [actingOn, setActingOn] = useState(null);
+    const [currentUserId, setCurrentUserId] = useState(null);
 
     async function loadProfiles() {
         setLoading(true);
         const { data, error } = await supabase
             .from("profiles")
-            .select("id, username, approved, is_admin, created_at")
+            .select("id, username, approved, revoked, is_admin, created_at")
             .order("created_at", { ascending: false });
 
         setLoading(false);
@@ -28,22 +29,57 @@ export default function Admin() {
     }
 
     useEffect(() => {
+        supabase.auth.getUser().then(({ data }) => {
+            setCurrentUserId(data.user?.id ?? null);
+        });
         loadProfiles();
     }, []);
 
-    async function approve(id) {
+    async function updateProfile(id, changes) {
         setActingOn(id);
         const { error } = await supabase
             .from("profiles")
-            .update({ approved: true })
+            .update(changes)
             .eq("id", id);
         setActingOn(null);
 
         if (error) {
-            setError("Erro ao aprovar a conta.");
+            setError("Erro ao atualizar a conta.");
             return;
         }
+        setError(null);
         loadProfiles();
+    }
+
+    function approve(id) {
+        updateProfile(id, { approved: true, revoked: false });
+    }
+
+    function revokeAccess(id) {
+        if (!window.confirm("Revogar o acesso desta conta? O utilizador deixa de conseguir entrar.")) {
+            return;
+        }
+        updateProfile(id, { approved: false, revoked: true });
+    }
+
+    function readmit(id) {
+        if (!window.confirm("Esta conta tinha o acesso revogado. Tens a certeza que queres readmiti-la?")) {
+            return;
+        }
+        updateProfile(id, { approved: true, revoked: false });
+    }
+
+    function makeAdmin(id) {
+        updateProfile(id, { is_admin: true });
+    }
+
+    function removeAdmin(id) {
+        if (id === currentUserId) {
+            if (!window.confirm("Vais remover os teus próprios privilégios de admin. Continuar?")) {
+                return;
+            }
+        }
+        updateProfile(id, { is_admin: false });
     }
 
     if (loading) {
@@ -54,20 +90,17 @@ export default function Admin() {
         );
     }
 
-    if (error) {
-        return (
-            <div className="max-w-3xl mx-auto px-6 py-16">
-                <p className="text-red-500 font-medium">{error}</p>
-            </div>
-        );
-    }
-
-    const pendentes = profiles.filter((p) => !p.approved);
+    const pendentes = profiles.filter((p) => !p.approved && !p.revoked);
+    const revogados = profiles.filter((p) => !p.approved && p.revoked);
     const aprovados = profiles.filter((p) => p.approved);
 
     return (
         <div className="max-w-3xl mx-auto px-6 py-16">
             <h1 className="text-3xl font-extrabold mb-8">Administração de contas</h1>
+
+            {error && (
+                <p className="mb-6 text-sm text-red-500 font-medium">{error}</p>
+            )}
 
             <h2 className="text-xl font-bold mb-4">
                 Pendentes ({pendentes.length})
@@ -95,12 +128,74 @@ export default function Admin() {
             </ul>
 
             <h2 className="text-xl font-bold mb-4">
+                Revogados ({revogados.length})
+            </h2>
+            {revogados.length === 0 && (
+                <p className="opacity-70 mb-8">Sem contas revogadas.</p>
+            )}
+            <ul className="flex flex-col gap-3 mb-10">
+                {revogados.map((p) => (
+                    <li
+                        key={p.id}
+                        className="flex items-center justify-between px-4 py-3 rounded-lg border gap-3 flex-wrap"
+                        style={{ borderColor: "#c0392b" }}
+                    >
+                        <div>
+                            <span className="font-medium">{p.username}</span>
+                            <p className="text-xs mt-0.5" style={{ color: "#c0392b" }}>
+                                Acesso revogado — readmitir só se tiveres a certeza.
+                            </p>
+                        </div>
+                        <button
+                            onClick={() => readmit(p.id)}
+                            disabled={actingOn === p.id}
+                            className="px-3 py-1.5 rounded-lg text-sm font-semibold border disabled:opacity-60"
+                        >
+                            Readmitir
+                        </button>
+                    </li>
+                ))}
+            </ul>
+
+            <h2 className="text-xl font-bold mb-4">
                 Aprovados ({aprovados.length})
             </h2>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-3">
                 {aprovados.map((p) => (
-                    <li key={p.id} className="px-4 py-2 rounded-lg border opacity-70">
-                        {p.username} {p.is_admin && "· admin"}
+                    <li
+                        key={p.id}
+                        className="flex items-center justify-between px-4 py-3 rounded-lg border gap-3 flex-wrap"
+                    >
+                        <span className="font-medium">
+                            {p.username} {p.is_admin && <span className="opacity-60">· admin</span>}
+                        </span>
+                        <div className="flex items-center gap-2">
+                            {p.is_admin ? (
+                                <button
+                                    onClick={() => removeAdmin(p.id)}
+                                    disabled={actingOn === p.id}
+                                    className="px-3 py-1.5 rounded-lg text-sm font-semibold border disabled:opacity-60"
+                                >
+                                    Remover admin
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => makeAdmin(p.id)}
+                                    disabled={actingOn === p.id}
+                                    className="px-3 py-1.5 rounded-lg text-sm font-semibold border disabled:opacity-60"
+                                >
+                                    Tornar admin
+                                </button>
+                            )}
+                            <button
+                                onClick={() => revokeAccess(p.id)}
+                                disabled={actingOn === p.id}
+                                className="px-3 py-1.5 rounded-lg text-sm font-semibold text-white disabled:opacity-60"
+                                style={{ background: "#c0392b" }}
+                            >
+                                Revogar acesso
+                            </button>
+                        </div>
                     </li>
                 ))}
             </ul>
