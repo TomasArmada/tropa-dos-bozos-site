@@ -14,6 +14,7 @@ export default function MainMenu({
                                      brandAccent = "PROJETO",
                                      isLoggedIn = false,
                                      userName = "",
+                                     isAdmin = false,
                                      onLogout = () => {},
                                      dark = true,
                                      setDark = () => {},
@@ -71,6 +72,25 @@ export default function MainMenu({
                             )}
                         </NavLink>
                     ))}
+                    {isLoggedIn && isAdmin && (
+                        <NavLink
+                            to="/admin"
+                            className="relative text-sm font-medium pb-1 transition-colors"
+                            style={({ isActive }) => ({ color: linkColor(isActive), transition: themeTransition })}
+                        >
+                            {({ isActive }) => (
+                                <>
+                                    Admin
+                                    {isActive && (
+                                        <span
+                                            className="absolute left-0 right-0 -bottom-[1px] h-[2px] rounded-full"
+                                            style={{ background: "#ff6a1f" }}
+                                        />
+                                    )}
+                                </>
+                            )}
+                        </NavLink>
+                    )}
                 </div>
 
                 {/* Right side - desktop */}
@@ -159,6 +179,16 @@ export default function MainMenu({
                             {link.label}
                         </NavLink>
                     ))}
+                    {isLoggedIn && isAdmin && (
+                        <NavLink
+                            to="/admin"
+                            onClick={() => setMobileOpen(false)}
+                            className="text-sm font-medium pt-3"
+                            style={({ isActive }) => ({ color: linkColor(isActive), transition: themeTransition })}
+                        >
+                            Admin
+                        </NavLink>
+                    )}
 
                     <div className="flex items-center gap-3 pt-2">
                         {isLoggedIn ? (
