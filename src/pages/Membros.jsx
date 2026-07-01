@@ -103,10 +103,11 @@ export default function Membros({ dark = true, session = null }) {
                             <div className="flex items-center gap-3 mb-4">
                                 <div
                                     className="w-14 h-14 rounded-full bg-cover bg-center flex-shrink-0"
-                                    style={{
-                                        backgroundImage: `url(${isEditing ? form.photo_url : m.photo_url || ""})`,
-                                        background: (isEditing ? form.photo_url : m.photo_url) ? undefined : "rgba(255,106,31,0.15)",
-                                    }}
+                                    style={
+                                        (isEditing ? form.photo_url : m.photo_url)
+                                            ? { backgroundImage: `url(${isEditing ? form.photo_url : m.photo_url})` }
+                                            : { backgroundColor: "rgba(255,106,31,0.15)" }
+                                    }
                                 />
                                 <div className="flex-1">
                                     {isEditing ? (
