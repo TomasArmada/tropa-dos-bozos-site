@@ -3,8 +3,8 @@ import { Routes, Route } from 'react-router-dom'
 import { supabase } from './supabaseClient'
 import MainMenu from './components/MainMenu'
 import Home from './pages/Home'
-import Tarefas from './pages/Tarefas'
-import Equipa from './pages/Equipa'
+import Calendario from './pages/Calendario'
+import Membros from './pages/Membros'
 import Sobre from './pages/Sobre'
 import Entrar from './pages/Entrar'
 import CriarConta from './pages/CriarConta'
@@ -64,12 +64,12 @@ function App() {
                 onLogout={handleLogout}
             />
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/tarefas" element={<Tarefas />} />
-                <Route path="/equipa" element={<Equipa />} />
-                <Route path="/sobre" element={<Sobre />} />
-                <Route path="/entrar" element={<Entrar />} />
-                <Route path="/criar-conta" element={<CriarConta />} />
+                <Route path="/" element={<Home dark={dark} isLoggedIn={!!session} />} />
+                <Route path="/calendario" element={<Calendario dark={dark} session={session} username={username} />} />
+                <Route path="/membros" element={<Membros dark={dark} session={session} />} />
+                <Route path="/sobre" element={<Sobre dark={dark} />} />
+                <Route path="/entrar" element={<Entrar dark={dark} />} />
+                <Route path="/criar-conta" element={<CriarConta dark={dark} />} />
                 <Route path="/admin" element={<Admin />} />
             </Routes>
         </div>

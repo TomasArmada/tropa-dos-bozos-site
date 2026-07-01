@@ -4,8 +4,8 @@ import { LogIn, UserPlus, Moon, Sun, Menu, X } from "lucide-react";
 
 const LINKS = [
     { label: "Home", to: "/" },
-    { label: "Tarefas", to: "/tarefas" },
-    { label: "Equipa", to: "/equipa" },
+    { label: "Calendário", to: "/calendario" },
+    { label: "Membros", to: "/membros" },
     { label: "Sobre", to: "/sobre" },
 ];
 
