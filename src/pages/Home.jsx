@@ -17,6 +17,7 @@ const FRASES = [
     { linha1: "Nyan cat virou transgenero?", linha2: "T0mada, 2026" },
     { linha1: "Mano diz me qm n quer ser fdd pelo Martin Burger King, fogo deve ter 2 paes naquele cu mano", linha2: "Corsa, 2026" },
     { linha1: "i need boobies in my life", linha2: "LSC, 2026" },
+    { linha1: "prova que pedofilia > violencia domestica", linha2: "karlpt, 2026"}
 ];
 
 function destacar(texto) {
@@ -157,7 +158,7 @@ export default function Home({ dark = true, isLoggedIn = false, isAdmin = false 
             >
                 <div className="w-full max-w-4xl flex flex-col md:flex-row items-center gap-10 md:gap-14">
                     <img
-                        src="src/assets/bozos-logo-2.jpg"
+                        src="/images/bozos-logo-2.jpg"
                         alt="TROPA DOS BOZOS"
                         className="w-40 h-40 md:w-56 md:h-56 object-cover flex-shrink-0 rounded-3xl"
                         style={{
