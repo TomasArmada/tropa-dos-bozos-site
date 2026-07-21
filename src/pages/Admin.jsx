@@ -85,7 +85,7 @@ export default function Admin() {
     if (loading) {
         return (
             <div className="max-w-3xl mx-auto px-6 py-16">
-                <p>A carregar...</p>
+                <p style={{ color: "var(--text-soft)" }}>A carregar...</p>
             </div>
         );
     }
@@ -96,30 +96,31 @@ export default function Admin() {
 
     return (
         <div className="max-w-3xl mx-auto px-6 py-16">
-            <h1 className="text-3xl font-extrabold mb-8">Administração de contas</h1>
+            <h1 className="text-2xl font-semibold mb-8" style={{ color: "var(--text)" }}>Administração de contas</h1>
 
             {error && (
-                <p className="mb-6 text-sm text-red-500 font-medium">{error}</p>
+                <p className="mb-6 text-sm font-medium" style={{ color: "var(--danger)" }}>{error}</p>
             )}
 
-            <h2 className="text-xl font-bold mb-4">
+            <h2 className="text-xs font-mono-label uppercase mb-4" style={{ color: "var(--text-faint)" }}>
                 Pendentes ({pendentes.length})
             </h2>
             {pendentes.length === 0 && (
-                <p className="opacity-70 mb-8">Sem contas pendentes.</p>
+                <p className="mb-8" style={{ color: "var(--text-faint)" }}>Sem contas pendentes.</p>
             )}
-            <ul className="flex flex-col gap-3 mb-10">
+            <ul className="flex flex-col gap-2 mb-10">
                 {pendentes.map((p) => (
                     <li
                         key={p.id}
-                        className="flex items-center justify-between px-4 py-3 rounded-lg border"
+                        className="flex items-center justify-between px-4 py-3 rounded-md"
+                        style={{ border: "1px solid var(--border)", background: "var(--surface)" }}
                     >
-                        <span className="font-medium">{p.username}</span>
+                        <span className="font-medium" style={{ color: "var(--text)" }}>{p.username}</span>
                         <button
                             onClick={() => approve(p.id)}
                             disabled={actingOn === p.id}
-                            className="px-4 py-1.5 rounded-lg text-white text-sm font-semibold disabled:opacity-60"
-                            style={{ background: "#ff6a1f" }}
+                            className="px-4 py-1.5 rounded-md text-sm font-medium disabled:opacity-60"
+                            style={{ background: "var(--accent)", color: "var(--accent-text)" }}
                         >
                             {actingOn === p.id ? "A aprovar..." : "Aprovar"}
                         </button>
@@ -127,29 +128,30 @@ export default function Admin() {
                 ))}
             </ul>
 
-            <h2 className="text-xl font-bold mb-4">
+            <h2 className="text-xs font-mono-label uppercase mb-4" style={{ color: "var(--text-faint)" }}>
                 Revogados ({revogados.length})
             </h2>
             {revogados.length === 0 && (
-                <p className="opacity-70 mb-8">Sem contas revogadas.</p>
+                <p className="mb-8" style={{ color: "var(--text-faint)" }}>Sem contas revogadas.</p>
             )}
-            <ul className="flex flex-col gap-3 mb-10">
+            <ul className="flex flex-col gap-2 mb-10">
                 {revogados.map((p) => (
                     <li
                         key={p.id}
-                        className="flex items-center justify-between px-4 py-3 rounded-lg border gap-3 flex-wrap"
-                        style={{ borderColor: "#c0392b" }}
+                        className="flex items-center justify-between px-4 py-3 rounded-md gap-3 flex-wrap"
+                        style={{ border: "1px solid var(--danger)", background: "var(--danger-soft)" }}
                     >
                         <div>
-                            <span className="font-medium">{p.username}</span>
-                            <p className="text-xs mt-0.5" style={{ color: "#c0392b" }}>
+                            <span className="font-medium" style={{ color: "var(--text)" }}>{p.username}</span>
+                            <p className="text-xs mt-0.5" style={{ color: "var(--danger)" }}>
                                 Acesso revogado — readmitir só se tiveres a certeza.
                             </p>
                         </div>
                         <button
                             onClick={() => readmit(p.id)}
                             disabled={actingOn === p.id}
-                            className="px-3 py-1.5 rounded-lg text-sm font-semibold border disabled:opacity-60"
+                            className="px-3 py-1.5 rounded-md text-sm font-medium disabled:opacity-60"
+                            style={{ border: "1px solid var(--border-strong)", color: "var(--text)" }}
                         >
                             Readmitir
                         </button>
@@ -157,24 +159,26 @@ export default function Admin() {
                 ))}
             </ul>
 
-            <h2 className="text-xl font-bold mb-4">
+            <h2 className="text-xs font-mono-label uppercase mb-4" style={{ color: "var(--text-faint)" }}>
                 Aprovados ({aprovados.length})
             </h2>
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-2">
                 {aprovados.map((p) => (
                     <li
                         key={p.id}
-                        className="flex items-center justify-between px-4 py-3 rounded-lg border gap-3 flex-wrap"
+                        className="flex items-center justify-between px-4 py-3 rounded-md gap-3 flex-wrap"
+                        style={{ border: "1px solid var(--border)", background: "var(--surface)" }}
                     >
-                        <span className="font-medium">
-                            {p.username} {p.is_admin && <span className="opacity-60">· admin</span>}
+                        <span className="font-medium" style={{ color: "var(--text)" }}>
+                            {p.username} {p.is_admin && <span style={{ color: "var(--text-faint)" }}>· admin</span>}
                         </span>
                         <div className="flex items-center gap-2">
                             {p.is_admin ? (
                                 <button
                                     onClick={() => removeAdmin(p.id)}
                                     disabled={actingOn === p.id}
-                                    className="px-3 py-1.5 rounded-lg text-sm font-semibold border disabled:opacity-60"
+                                    className="px-3 py-1.5 rounded-md text-sm font-medium disabled:opacity-60"
+                                    style={{ border: "1px solid var(--border-strong)", color: "var(--text)" }}
                                 >
                                     Remover admin
                                 </button>
@@ -182,7 +186,8 @@ export default function Admin() {
                                 <button
                                     onClick={() => makeAdmin(p.id)}
                                     disabled={actingOn === p.id}
-                                    className="px-3 py-1.5 rounded-lg text-sm font-semibold border disabled:opacity-60"
+                                    className="px-3 py-1.5 rounded-md text-sm font-medium disabled:opacity-60"
+                                    style={{ border: "1px solid var(--border-strong)", color: "var(--text)" }}
                                 >
                                     Tornar admin
                                 </button>
@@ -190,8 +195,8 @@ export default function Admin() {
                             <button
                                 onClick={() => revokeAccess(p.id)}
                                 disabled={actingOn === p.id}
-                                className="px-3 py-1.5 rounded-lg text-sm font-semibold text-white disabled:opacity-60"
-                                style={{ background: "#c0392b" }}
+                                className="px-3 py-1.5 rounded-md text-sm font-medium disabled:opacity-60"
+                                style={{ background: "var(--danger)", color: "#ffffff" }}
                             >
                                 Revogar acesso
                             </button>

@@ -92,19 +92,19 @@ export default function Calendario({ dark = true, session = null, username = "" 
         return (
             <div className="max-w-lg mx-auto px-6 py-24 text-center">
                 <div
-                    className="w-14 h-14 mx-auto flex items-center justify-center rounded-full mb-6"
-                    style={{ background: "rgba(255,106,31,0.12)", color: "#ff6a1f" }}
+                    className="w-12 h-12 mx-auto flex items-center justify-center rounded-full mb-6"
+                    style={{ background: "var(--accent-soft)", color: "var(--accent)" }}
                 >
-                    <Lock size={22} />
+                    <Lock size={19} />
                 </div>
-                <h1 className="text-2xl font-extrabold mb-3">Calendário reservado à tropa</h1>
-                <p className="opacity-70 mb-8">
+                <h1 className="text-xl font-semibold mb-3" style={{ color: "var(--text)" }}>Calendário reservado à tropa</h1>
+                <p className="mb-8" style={{ color: "var(--text-soft)" }}>
                     Só quem tem sessão iniciada pode ver e marcar disponibilidades no calendário.
                 </p>
                 <a
                     href="/entrar"
-                    className="inline-block px-5 py-3 rounded-lg text-sm font-semibold text-white"
-                    style={{ background: "#ff6a1f" }}
+                    className="inline-block px-5 py-2.5 rounded-md text-sm font-medium"
+                    style={{ background: "var(--accent)", color: "var(--accent-text)" }}
                 >
                     Entrar
                 </a>
@@ -113,27 +113,27 @@ export default function Calendario({ dark = true, session = null, username = "" 
     }
 
     return (
-        <div className="max-w-5xl mx-auto px-6 py-16">
-            <h1 className="text-3xl font-extrabold mb-2">Calendário</h1>
-            <p className="opacity-70 mb-8">Marca os dias em que estás disponível para o resto da tropa ver.</p>
+        <div className="max-w-4xl mx-auto px-6 py-16">
+            <h1 className="text-2xl font-semibold mb-2" style={{ color: "var(--text)" }}>Calendário</h1>
+            <p className="mb-8" style={{ color: "var(--text-soft)" }}>Marca os dias em que estás disponível para o resto da tropa ver.</p>
 
-            {error && <p className="text-sm text-red-500 mb-4">{error}</p>}
+            {error && <p className="text-sm mb-4" style={{ color: "var(--danger)" }}>{error}</p>}
 
             <div className="flex items-center justify-between mb-6">
-                <button onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() - 1, 1))}>
-                    <ChevronLeft />
+                <button onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() - 1, 1))} style={{ color: "var(--text-soft)" }}>
+                    <ChevronLeft size={18} />
                 </button>
-                <h2 className="text-lg font-bold">
+                <h2 className="text-sm font-mono-label uppercase" style={{ color: "var(--text)" }}>
                     {MESES[cursor.getMonth()]} {cursor.getFullYear()}
                 </h2>
-                <button onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1))}>
-                    <ChevronRight />
+                <button onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1))} style={{ color: "var(--text-soft)" }}>
+                    <ChevronRight size={18} />
                 </button>
             </div>
 
             <div className="grid grid-cols-7 gap-2 mb-2">
                 {DIAS_SEMANA.map((d) => (
-                    <div key={d} className="text-center text-xs font-semibold opacity-60">
+                    <div key={d} className="text-center text-xs font-mono-label uppercase" style={{ color: "var(--text-faint)" }}>
                         {d}
                     </div>
                 ))}
@@ -149,17 +149,17 @@ export default function Calendario({ dark = true, session = null, username = "" 
                         <button
                             key={key}
                             onClick={() => setSelected(key)}
-                            className="aspect-square rounded-lg p-1.5 flex flex-col items-start text-left transition-colors"
+                            className="aspect-square rounded-md p-1.5 flex flex-col items-start text-left"
                             style={{
-                                border: `1px solid ${isSelected ? "#ff6a1f" : dark ? "#2a2420" : "#ece5db"}`,
-                                background: dark ? "#1c1712" : "#ffffff",
+                                border: `1px solid ${isSelected ? "var(--accent)" : "var(--border)"}`,
+                                background: "var(--surface)",
                             }}
                         >
-                            <span className="text-xs font-semibold">{d.getDate()}</span>
+                            <span className="text-xs font-medium" style={{ color: "var(--text)" }}>{d.getDate()}</span>
                             {marcs.length > 0 && (
                                 <span
-                                    className="mt-auto text-[10px] font-semibold px-1.5 py-0.5 rounded-full"
-                                    style={{ background: "rgba(255,106,31,0.15)", color: "#ff6a1f" }}
+                                    className="mt-auto text-[10px] font-mono-label px-1.5 py-0.5 rounded"
+                                    style={{ background: "var(--accent-soft)", color: "var(--accent)" }}
                                 >
                                     {marcs.length}
                                 </span>
@@ -171,26 +171,26 @@ export default function Calendario({ dark = true, session = null, username = "" 
 
             {selected && (
                 <div
-                    className="mt-8 p-5 rounded-xl"
-                    style={{ border: `1px solid ${dark ? "#2a2420" : "#ece5db"}`, background: dark ? "#1c1712" : "#ffffff" }}
+                    className="mt-8 p-5 rounded-lg"
+                    style={{ border: "1px solid var(--border)", background: "var(--surface)" }}
                 >
-                    <h3 className="font-bold mb-4">{selected}</h3>
+                    <h3 className="font-mono-label text-sm mb-4" style={{ color: "var(--text)" }}>{selected}</h3>
 
                     <ul className="flex flex-col gap-2 mb-5">
                         {marcacoesDoDia(selected).length === 0 && (
-                            <p className="text-sm opacity-60">Ainda ninguém marcou disponibilidade.</p>
+                            <p className="text-sm" style={{ color: "var(--text-faint)" }}>Ainda ninguém marcou disponibilidade.</p>
                         )}
                         {marcacoesDoDia(selected).map((m) => (
                             <li
                                 key={m.id}
-                                className="flex items-center justify-between text-sm px-3 py-2 rounded-lg"
-                                style={{ background: dark ? "#16120f" : "#fdfaf6" }}
+                                className="flex items-center justify-between text-sm px-3 py-2 rounded-md"
+                                style={{ background: "var(--bg)" }}
                             >
-                                <span>
+                                <span style={{ color: "var(--text)" }}>
                                     <strong>{m.username}</strong> — {m.nota}
                                 </span>
                                 {m.user_id === session.user.id && (
-                                    <button onClick={() => removerMarcacao(m.id)} className="opacity-60 hover:opacity-100">
+                                    <button onClick={() => removerMarcacao(m.id)} style={{ color: "var(--text-faint)" }}>
                                         <Trash2 size={14} />
                                     </button>
                                 )}
@@ -203,12 +203,13 @@ export default function Calendario({ dark = true, session = null, username = "" 
                             value={nota}
                             onChange={(e) => setNota(e.target.value)}
                             placeholder="Ex: Livre depois das 18h"
-                            className="flex-1 px-4 py-2 rounded-lg border text-sm"
+                            className="flex-1 px-4 py-2 rounded-md border text-sm"
+                            style={{ borderColor: "var(--border-strong)", background: "var(--bg)", color: "var(--text)" }}
                         />
                         <button
                             onClick={adicionarMarcacao}
-                            className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold text-white"
-                            style={{ background: "#ff6a1f" }}
+                            className="flex items-center gap-1.5 px-4 py-2 rounded-md text-sm font-medium"
+                            style={{ background: "var(--accent)", color: "var(--accent-text)" }}
                         >
                             <Plus size={14} /> Marcar
                         </button>

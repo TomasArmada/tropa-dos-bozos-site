@@ -69,8 +69,8 @@ export default function CriarConta({ dark = true }) {
         return (
             <div className="min-h-[80vh] flex items-center justify-center px-6 py-16">
                 <div className="max-w-md text-center">
-                    <h1 className="text-3xl font-extrabold mb-4">Conta criada</h1>
-                    <p className="text-base opacity-80">
+                    <h1 className="text-2xl font-semibold mb-4" style={{ color: "var(--text)" }}>Conta criada</h1>
+                    <p className="text-base" style={{ color: "var(--text-soft)" }}>
                         A tua conta foi criada e está à espera de aprovação por um administrador.
                         Volta a tentar entrar mais tarde.
                     </p>
@@ -82,31 +82,29 @@ export default function CriarConta({ dark = true }) {
     return (
         <div className="min-h-[80vh] flex items-center justify-center px-6 py-16">
             <div
-                className="w-full max-w-md p-8 rounded-2xl"
-                style={{
-                    border: `1px solid ${dark ? "#2a2420" : "#ece5db"}`,
-                    background: dark ? "#1c1712" : "#ffffff",
-                }}
+                className="w-full max-w-md p-8 rounded-lg"
+                style={{ border: "1px solid var(--border)", background: "var(--surface)" }}
             >
                 <div
-                    className="w-12 h-12 flex items-center justify-center rounded-xl mb-6"
-                    style={{ background: "rgba(255,106,31,0.12)", color: "#ff6a1f" }}
+                    className="w-10 h-10 flex items-center justify-center rounded-md mb-6"
+                    style={{ background: "var(--accent-soft)", color: "var(--accent)" }}
                 >
-                    <UserPlus size={20} />
+                    <UserPlus size={18} />
                 </div>
 
-                <h1 className="text-2xl font-extrabold mb-1">Junta-te à tropa</h1>
-                <p className="text-sm opacity-60 mb-8">
+                <h1 className="text-xl font-semibold mb-1" style={{ color: "var(--text)" }}>Junta-te à tropa</h1>
+                <p className="text-sm mb-8" style={{ color: "var(--text-soft)" }}>
                     A tua conta fica à espera de aprovação de um admin antes de conseguires entrar.
                 </p>
 
-                {error && <p className="mb-4 text-sm text-red-500 font-medium">{error}</p>}
+                {error && <p className="mb-4 text-sm font-medium" style={{ color: "var(--danger)" }}>{error}</p>}
 
                 <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                     <input
                         type="text"
                         placeholder="Username"
-                        className="px-4 py-2.5 rounded-lg border text-sm"
+                        className="px-4 py-2.5 rounded-md border text-sm"
+                        style={{ borderColor: "var(--border-strong)", background: "var(--bg)", color: "var(--text)" }}
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
@@ -114,7 +112,8 @@ export default function CriarConta({ dark = true }) {
                     <input
                         type="password"
                         placeholder="Palavra-passe"
-                        className="px-4 py-2.5 rounded-lg border text-sm"
+                        className="px-4 py-2.5 rounded-md border text-sm"
+                        style={{ borderColor: "var(--border-strong)", background: "var(--bg)", color: "var(--text)" }}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         minLength={6}
@@ -122,10 +121,10 @@ export default function CriarConta({ dark = true }) {
                     />
 
                     <div
-                        className="flex items-center gap-3 px-4 py-2.5 rounded-lg"
-                        style={{ border: `1px solid ${dark ? "#3a332c" : "#e2dacd"}` }}
+                        className="flex items-center gap-3 px-4 py-2.5 rounded-md"
+                        style={{ border: "1px solid var(--border-strong)" }}
                     >
-                        <span className="text-sm font-semibold whitespace-nowrap">
+                        <span className="text-sm font-medium whitespace-nowrap" style={{ color: "var(--text)" }}>
                             Quanto é {desafio.a} + {desafio.b}?
                         </span>
                         <input
@@ -134,13 +133,14 @@ export default function CriarConta({ dark = true }) {
                             value={captchaInput}
                             onChange={(e) => setCaptchaInput(e.target.value)}
                             className="flex-1 min-w-0 px-2 py-1 rounded border text-sm"
+                            style={{ borderColor: "var(--border-strong)", background: "var(--bg)", color: "var(--text)" }}
                             required
                         />
                         <button
                             type="button"
                             onClick={novoDesafio}
                             aria-label="Nova pergunta"
-                            className="opacity-60 hover:opacity-100"
+                            style={{ color: "var(--text-soft)" }}
                         >
                             <RefreshCcw size={14} />
                         </button>
@@ -149,16 +149,16 @@ export default function CriarConta({ dark = true }) {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="px-4 py-2.5 rounded-lg text-white font-semibold text-sm disabled:opacity-60 mt-2"
-                        style={{ background: "#ff6a1f" }}
+                        className="px-4 py-2.5 rounded-md font-medium text-sm disabled:opacity-60 mt-2"
+                        style={{ background: "var(--accent)", color: "var(--accent-text)" }}
                     >
                         {loading ? "A criar..." : "Criar conta"}
                     </button>
                 </form>
 
-                <p className="text-sm opacity-60 mt-6 text-center">
+                <p className="text-sm mt-6 text-center" style={{ color: "var(--text-soft)" }}>
                     Já tens conta?{" "}
-                    <NavLink to="/entrar" style={{ color: "#ff6a1f" }} className="font-semibold">
+                    <NavLink to="/entrar" style={{ color: "var(--accent)" }} className="font-medium">
                         Entra
                     </NavLink>
                 </p>

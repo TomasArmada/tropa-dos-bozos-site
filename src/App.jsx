@@ -9,6 +9,7 @@ import Sobre from './pages/Sobre'
 import Entrar from './pages/Entrar'
 import CriarConta from './pages/CriarConta'
 import Admin from './pages/Admin'
+import NoticiaDetalhe from './pages/NoticiaDetalhe'
 
 function App() {
     const [dark, setDark] = useState(true)
@@ -64,13 +65,14 @@ function App() {
                 onLogout={handleLogout}
             />
             <Routes>
-                <Route path="/" element={<Home dark={dark} isLoggedIn={!!session} />} />
+                <Route path="/" element={<Home dark={dark} isLoggedIn={!!session} isAdmin={isAdmin}/>} />
                 <Route path="/calendario" element={<Calendario dark={dark} session={session} username={username} />} />
                 <Route path="/membros" element={<Membros dark={dark} session={session} />} />
                 <Route path="/sobre" element={<Sobre dark={dark} />} />
                 <Route path="/entrar" element={<Entrar dark={dark} />} />
                 <Route path="/criar-conta" element={<CriarConta dark={dark} />} />
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/noticias/:id" element={<NoticiaDetalhe />} />
             </Routes>
         </div>
     )
