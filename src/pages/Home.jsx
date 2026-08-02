@@ -13,12 +13,18 @@ import {
 } from "lucide-react";
 import { supabase } from "../supabaseClient";
 
-const FRASES = [
+/*const FRASES = [
     { linha1: "Nyan cat virou transgenero?", linha2: "T0mada, 2026" },
     { linha1: "Mano diz me qm n quer ser fdd pelo Martin Burger King, fogo deve ter 2 paes naquele cu mano", linha2: "Corsa, 2026" },
     { linha1: "i need boobies in my life", linha2: "LSC, 2026" },
     { linha1: "prova que pedofilia > violencia domestica", linha2: "karlpt, 2026"}
-];
+];*/
+
+const FRASES = [
+    { linha1: "A terra dos fun facts", linha2: "Tropa Dos Bozos"},
+    { linha1: "A terra dos counters", linha2: "Tropa Dos Bozos"},
+    { linha1: "A terra dos Opel's Corsa", linha2: "Tropa Dos Bozos"}
+]
 
 function destacar(texto) {
     const partes = texto.split(/(TROPA(?: DOS BOZOS)?)/g);
