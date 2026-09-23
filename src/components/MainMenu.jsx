@@ -7,6 +7,7 @@ const LINKS = [
     { label: "Calendário", to: "/calendario" },
     { label: "Membros", to: "/membros" },
     { label: "Sobre", to: "/sobre" },
+    { label: "Downloads", to: "/downloads" },
 ];
 
 export default function MainMenu({

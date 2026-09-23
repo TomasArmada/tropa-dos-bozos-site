@@ -10,6 +10,7 @@ import Entrar from './pages/Entrar'
 import CriarConta from './pages/CriarConta'
 import Admin from './pages/Admin'
 import NoticiaDetalhe from './pages/NoticiaDetalhe'
+import Downloads from './pages/Downloads'
 
 function App() {
     const [dark, setDark] = useState(true)
@@ -73,6 +74,7 @@ function App() {
                 <Route path="/criar-conta" element={<CriarConta dark={dark} />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/noticias/:id" element={<NoticiaDetalhe />} />
+                <Route path="/downloads" element={<Downloads />} />
             </Routes>
         </div>
     )
